@@ -26,7 +26,6 @@
 FEATURE = 'spatial pyramid sift + fisher + gist';
 
 % CLASSIFIER = 'nearest neighbor';
-% CLASSIFIER = 'support vector machine';
 CLASSIFIER = 'support vector machine';
 
 % set up paths to VLFeat functions. 
@@ -86,6 +85,21 @@ switch lower(FEATURE)
         test_image_feats  = get_pyramid_sift(test_image_paths);
         
     case 'spatial pyramid sift + fisher + gist'
+        
+        if ~exist('pyramid_vocab.mat', 'file')
+           fprintf('No existing pyramid vocabulary found. Computing one from training images\n')
+           pyramid_vocab = build_pyramid_vocab(train_image_paths);
+            save('pyramid_vocab.mat', 'pyramid_vocab');
+        end
+
+        if ~exist('means.mat', 'file')
+            fprintf('No existing fisher word vocabulary found. Computing one from training images\n')
+            [means, covariances, priors] = build_fisher_vocabulary(train_image_paths);
+            save('means.mat', 'means');
+            save('covariances.mat', 'covariances');
+            save('priors.mat', 'priors');
+        end
+        
         train_image_feats = get_pyramid_gist_fisher(train_image_paths);
         test_image_feats  = get_pyramid_gist_fisher(test_image_paths);
         
@@ -119,6 +133,14 @@ switch lower(FEATURE)
      
     case 'gist & fisher'
         
+        if ~exist('means.mat', 'file')
+            fprintf('No existing fisher word vocabulary found. Computing one from training images\n')
+            [means, covariances, priors] = build_fisher_vocabulary(train_image_paths);
+            save('means.mat', 'means');
+            save('covariances.mat', 'covariances');
+            save('priors.mat', 'priors');
+        end
+
         train_image_feats = get_fisher_and_gist(train_image_paths);
         test_image_feats = get_fisher_and_gist(test_image_paths);
         

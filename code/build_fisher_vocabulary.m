@@ -4,7 +4,7 @@ function [means, covariances, priors] = build_fisher_vocabulary( image_paths )
     total_descriptors = [];
     
     % Sample random permutation of images
-    sample_size = length(image_paths);
+    sample_size = 200;
     perm = randperm(length(image_paths), sample_size);
     n = length(perm);
     
