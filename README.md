@@ -68,7 +68,9 @@ For each category we are trying to define, we perform a one vs many strategy aga
 Results
 -------
 
-The results of my latest run was 80.0% using these descriptors. I have also similar results with just Fisher encoding and Gist descriptors. My assumption is that Fisher encoding and pyramid dense sifts preserves similar spatial information about an image, so using both does not provide an advantage. Below is the confusion matrix of test image categories against trianing image categories.
+The results of my latest run was 80.0% using these descriptors. I have also similar results with just Fisher encoding and Gist descriptors. My assumption is that Fisher encoding and pyramid dense sifts preserves similar spatial information about an image, so using both does not provide an advantage. Below is the confusion matrix of test image categories against training image categories.
+
+To confirm these results, I still need to perform random splits on my training and testing data and take the average, but I am confident this accuracy will remain. At least with this set of images and categories.
 
 ![Confusion Matrix](https://raw.githubusercontent.com/trngt/Scene-Classification/master/code/results_webpage/confusion_matrix.png "Confusion Matrix")
  
