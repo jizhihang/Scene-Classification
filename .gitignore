@@ -1,7 +1,6 @@
 
 code/*.mat
 .DS_Store
-code/results_webpage/thumbnails/
 *.m~
 data/
 
