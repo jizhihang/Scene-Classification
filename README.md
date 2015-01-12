@@ -73,4 +73,7 @@ The results of my latest run was 80.0% using these descriptors. I have also simi
 To confirm these results, I still need to perform random splits on my training and testing data and take the average, but I am confident this accuracy will remain. At least with this set of images and categories.
 
 ![Confusion Matrix](https://raw.githubusercontent.com/trngt/Scene-Classification/master/code/results_webpage/confusion_matrix.png "Confusion Matrix")
+
+
+[Additional Results](https://trngt.github.io/Scene-Classification) 
  
