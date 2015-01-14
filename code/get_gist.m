@@ -4,9 +4,9 @@ function gists = get_gist(image_paths)
     n = length(image_paths);
 
     param.imageSize = [256 256]; % it works also with non-square images
-    param.orientationsPerScale = [8 8 8 8];
-    param.numberBlocks = 4;
-    param.fc_prefilt = 4;
+    param.orientationsPerScale = [12 12 12 12];
+    param.numberBlocks = 8;
+    param.fc_prefilt = 8;
 
     clear gists
     
@@ -25,7 +25,6 @@ function gists = get_gist(image_paths)
         max_gist = max(gist);
         
         normalized_gist = (gist - mean_gist) ./ (max_gist - min_gist);
-        
         gists(i, :) = normalized_gist;
 
         print_progress_string(i, n, 'Getting Gist');
