@@ -10,7 +10,7 @@ for i = 1:num_epoch
                             test_labels, ...
                             categories, ...
                             abbr_categories, ...
-                            predicted_categories] = epoch();
+                            predicted_categories] = epoch(i);
 
     num_categories = length(categories);
     [accuracy, confusion_matrix] = create_confusion_matrix(predicted_categories, test_labels, categories, num_categories);
@@ -22,7 +22,10 @@ end
 % 0.796
 
 % Random 50 images per categories:
-% 0.7547    0.7467    0.7253    0.7427    0.7427    0.7693    0.7520    0.7507    0.7680    0.7413
+% 0.7733    0.7733    0.7747    0.7720    0.7547    0.7707    0.7720    0.7613    0.7733    0.7733
+
+% Gist and Fisher
+% 0.7640    0.7640    0.7600    0.7640    0.7573    0.7520    0.7627    0.7747    0.7667    0.7627
 create_results_webpage( train_image_paths, ...
                         test_image_paths, ...
                         train_labels, ...

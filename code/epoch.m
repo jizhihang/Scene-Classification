@@ -4,7 +4,7 @@ function [train_image_paths, ...
                         test_labels, ...
                         categories, ...
                         abbr_categories, ...
-                        predicted_categories] = epoch()
+                        predicted_categories] = epoch(iteration)
 
     % FEATURE = 'tiny image';
     % FEATURE = 'bag of sift';
@@ -38,7 +38,7 @@ function [train_image_paths, ...
     % Random split
     fprintf('Getting shuffled paths and labels for all train and test data\n')
     [train_image_paths, test_image_paths, train_labels, test_labels] = ...
-        get_image_paths(data_path, categories, num_train_per_cat);
+        get_image_paths(data_path, categories, num_train_per_cat, true);
     %   train_image_paths  1500x1   cell      
     %   test_image_paths   1500x1   cell           
     %   train_labels       1500x1   cell         
@@ -69,7 +69,7 @@ function [train_image_paths, ...
 
             if ~exist('means.mat', 'file')
                 fprintf('No existing fisher word vocabulary found. Computing one from training images\n')
-                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths);
+                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths, 100);
                 save('means.mat', 'means');
                 save('covariances.mat', 'covariances');
                 save('priors.mat', 'priors');
@@ -110,7 +110,7 @@ function [train_image_paths, ...
 
             if ~exist('means.mat', 'file')
                 fprintf('No existing fisher word vocabulary found. Computing one from training images\n')
-                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths);
+                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths, 100);
                 save('means.mat', 'means');
                 save('covariances.mat', 'covariances');
                 save('priors.mat', 'priors');
@@ -123,7 +123,7 @@ function [train_image_paths, ...
 
             if ~exist('means.mat', 'file')
                 fprintf('No existing fisher word vocabulary found. Computing one from training images\n')
-                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths);
+                [means, covariances, priors] = build_fisher_vocabulary(train_image_paths, 100);
                 save('means.mat', 'means');
                 save('covariances.mat', 'covariances');
                 save('priors.mat', 'priors');
@@ -150,7 +150,7 @@ function [train_image_paths, ...
 
         case 'support vector machine'
             % YOU CODE svm_classify.m 
-            predicted_categories = svm_classify(train_image_feats, train_labels, test_image_feats);
+            predicted_categories = svm_classify(train_image_feats, train_labels, test_image_feats, 1.0000e-06);
 
         case 'placeholder'
             %The placeholder classifier simply predicts a random category for

@@ -1,5 +1,5 @@
 
-function predicted_categories = svm_classify(train_image_feats, train_labels, test_image_feats)
+function predicted_categories = svm_classify(train_image_feats, train_labels, test_image_feats, lambda)
 
 unique_labels = unique(train_labels);
 num_labels = size(unique_labels, 1);
@@ -15,7 +15,7 @@ for i = 1:num_labels
     
     fprintf('Predicting Label %i/%i: %s\n', i, num_labels, char(label));
     
-    [W, B] = vl_svmtrain(train_image_feats', one_vs_many, 0.00001);
+    [W, B] = vl_svmtrain(train_image_feats', one_vs_many, lambda);
     predicted = W' * test_image_feats' + B';
     predicted_categories_mat(:, i) = predicted';
     

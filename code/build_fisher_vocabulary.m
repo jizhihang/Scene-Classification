@@ -1,5 +1,5 @@
 
-function [means, covariances, priors] = build_fisher_vocabulary( image_paths )
+function [means, covariances, priors] = build_fisher_vocabulary( image_paths, num_clusters)
 
     total_descriptors = [];
     
@@ -9,7 +9,10 @@ function [means, covariances, priors] = build_fisher_vocabulary( image_paths )
     n = length(perm);
     
     for i = 1:n
+        
+        % Random image index
         image_index = perm(i);
+        image_index = i;
         
         img = single(imread(image_paths{image_index}));
         
@@ -24,8 +27,7 @@ function [means, covariances, priors] = build_fisher_vocabulary( image_paths )
 
     disp('Creating GMM Clusters');
     
-    numClusters = 50;
-    [means, covariances, priors] = vl_gmm(data, numClusters);
+    [means, covariances, priors] = vl_gmm(data, num_clusters);
 
 end
 
